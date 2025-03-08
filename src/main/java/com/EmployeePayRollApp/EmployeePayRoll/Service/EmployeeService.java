@@ -15,21 +15,24 @@ public class EmployeeService {
     @Autowired
     private EmployeeRepository employeeRepository;
 
-    public List<Employee> getAllEmployees() {
-
-        return employeeRepository.findAll();
-    }
-
     public Optional<Employee> getEmployeeById(Long id) {
 
         return employeeRepository.findById(id);
     }
 
+    public List<Employee> getAllEmployees() {
+
+        return employeeRepository.findAll();
+    }
+
+
+
     public Employee saveEmployee(EmployeeDTO employeeDTO) {
 
         Employee employee = new Employee();
-        employee.setName(employeeDTO.getName());
         employee.setSalary(employeeDTO.getSalary());
+        employee.setName(employeeDTO.getName());
+
         System.out.println("Saving Employee: " + employee.getName());
 
         return employeeRepository.save(employee);
@@ -37,8 +40,9 @@ public class EmployeeService {
 
     public Employee updateEmployee(Long id, EmployeeDTO updatedEmployee) {
         return employeeRepository.findById(id).map(employee -> {
-            employee.setName(updatedEmployee.getName());
             employee.setSalary(updatedEmployee.getSalary());
+            employee.setName(updatedEmployee.getName());
+
             return employeeRepository.save(employee);
         }).orElse(null);
     }
@@ -47,4 +51,4 @@ public class EmployeeService {
 
         employeeRepository.deleteById(id);
     }
-}
+}//5th
