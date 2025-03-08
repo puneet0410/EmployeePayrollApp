@@ -1,5 +1,6 @@
 package com.EmployeePayRollApp.EmployeePayRoll.Controllers;
 
+import com.EmployeePayRollApp.EmployeePayRoll.DTO.EmployeeDTO;
 import com.EmployeePayRollApp.EmployeePayRoll.Entity.Employee;
 import com.EmployeePayRollApp.EmployeePayRoll.Service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +19,7 @@ public class EmployeeController {
     // GET all employees
     @GetMapping("/")
     public List<Employee> getAllEmployees() {
+
         return employeeService.getAllEmployees();
     }
 
@@ -29,14 +31,14 @@ public class EmployeeController {
 
     // POST - Create a new employee
     @PostMapping("/create")
-    public Employee createEmployee(@RequestBody Employee employee) {
-        return employeeService.saveEmployee(employee);
+    public Employee createEmployee(@RequestBody EmployeeDTO employeeDTO) {
+        return employeeService.saveEmployee(employeeDTO);
     }
 
     // PUT - Update an employee
     @PutMapping("/update/{id}")
-    public Employee updateEmployee(@PathVariable Long id, @RequestBody Employee employee) {
-        return employeeService.updateEmployee(id, employee);
+    public Employee updateEmployee(@PathVariable Long id, @RequestBody EmployeeDTO employeeDTO) {
+        return employeeService.updateEmployee(id, employeeDTO);
     }
 
     // DELETE - Remove an employee
@@ -46,10 +48,3 @@ public class EmployeeController {
         return "Employee with ID " + id + " deleted successfully.";
     }
 }
-
-
-//curl localhost:8080/employeepayrollservice/ -w "\n"
-//curl localhost:8080/employeepayrollservice/get/1 -w "\n"
-//curl -X POST -H "Content-Type: application/json" -d '{"name": "Lisa","salary": 2000}' "http://localhost:8080/employeepayrollservice/create" -w "\n"
-//curl -X PUT -H "Content-Type: application/json" -d '{"name": "Lisa","salary": 2500}' "http://localhost:8080/employeepayrollservice/update/1" -w "\n"
-//curl -X DELETE "http://localhost:8080/employeepayrollservice/delete/1" -w "\n"
