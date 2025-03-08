@@ -30,6 +30,7 @@ public class EmployeeService {
         Employee employee = new Employee();
         employee.setName(employeeDTO.getName());
         employee.setSalary(employeeDTO.getSalary());
+        System.out.println("Saving Employee: " + employee.getName());
 
         return employeeRepository.save(employee);
     }
@@ -39,7 +40,7 @@ public class EmployeeService {
             employee.setName(updatedEmployee.getName());
             employee.setSalary(updatedEmployee.getSalary());
             return employeeRepository.save(employee);
-        }).orElse(null);//branch 3.
+        }).orElse(null);
     }
 
     public void deleteEmployee(Long id) {
